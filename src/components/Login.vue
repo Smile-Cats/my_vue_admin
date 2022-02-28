@@ -62,7 +62,7 @@ export default {
         if (!valid) {
           return (this.loginLoading = false)
         }
-        const response = await this.$http.post('login', this.loginForm)
+        const response = await this.postRequest('login', this.loginForm)
         var res = response.data
         // console.log(res)
         if (res.meta.status !== 200) {

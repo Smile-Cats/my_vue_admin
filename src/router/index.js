@@ -1,19 +1,41 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../components/Login.vue'
-import Home from '../components/home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/login', component: Login },
-  { path: '/', redirect: '/login' },
-  { path: '/home', component: Home }
+  { path: '/login', component: resolve => require(['@/components/Login'], resolve) },
+  {
+    path: '/home',
+    component: resolve => require(['@/components/home.vue'], resolve),
+    children: [
+      {
+        path: '/fundlist',
+        name: '基金实时列表',
+        component: resolve => require(['@/components/fund/FundList'], resolve)
+      },
+      {
+        path: '/todayFundJson',
+        name: '今日基金配置',
+        component: resolve => require(['@/components/fund/TodayFundJson'], resolve)
+      },
+      {
+        path: '/indexInfo',
+        name: '指数信息',
+        component: resolve => require(['@/components/index/indexInfo'], resolve)
+      },
+      {
+        path: '/ChartLine',
+        name: '折线图',
+        component: resolve => require(['@/components/chart/ChartLine'], resolve)
+      }
+    ]
+  }
 ]
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  // base: process.env.BASE_URL,
   routes
 })
 
