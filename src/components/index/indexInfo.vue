@@ -68,7 +68,6 @@ export default {
       const that = this
       this.getRequest('/api/finance/getIndexInfo').then(resp => {
         if (resp && resp.status === 200) {
-          pass
           // var data = resp.data
           // that.indexData = resp.data
           // for (var key in [1,2,3,4]) {
